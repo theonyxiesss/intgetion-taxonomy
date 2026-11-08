@@ -1,12 +1,12 @@
 {
   "name": "@intgetion/taxonomy",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Skill taxonomy for INTGETION JOB LIST: skill catalog, aliases, normalization, suggestions, job categories.",
   "license": "UNLICENSED",
   "type": "module",
   "exports": {
     ".": "./src/modules/taxonomy/service/index.ts",
-    "./catalog": "./src/catalog/markers.ts",
+    "./catalog": "./src/catalog/index.ts",
     "./server": "./src/server/app.ts"
   },
   "scripts": {

@@ -233,3 +233,166 @@ export const MARKER_SKILLS: readonly MarkerSkill[] = [
     aliases: ["dataanalysis", "dataanalyst"],
   },
 ];
+
+/** Job and candidate markers (D202, MARKERS.md): employment, seniority, sectors, perks. */
+
+export const EMPLOYMENT_TYPES = [
+  "full_time",
+  "part_time",
+  "contract",
+  "freelance",
+  "internship",
+] as const;
+export type EmploymentType = (typeof EMPLOYMENT_TYPES)[number];
+
+export const SENIORITY_LEVELS = [
+  "internship",
+  "entry",
+  "mid",
+  "senior",
+  "lead",
+] as const;
+export type Seniority = (typeof SENIORITY_LEVELS)[number];
+
+export const MAX_JOB_SECTORS = 3;
+export const MAX_CANDIDATE_SECTORS = 5;
+export const MAX_JOB_PERKS = 8;
+
+export const PERKS = [
+  "crypto-pay",
+  "token-equity",
+  "async",
+  "four-day-week",
+  "visa-support",
+  "relocation",
+  "no-degree",
+  "junior-friendly",
+  "own-timezone",
+] as const;
+export type Perk = (typeof PERKS)[number];
+
+export const SENSITIVE_SECTORS = ["igaming", "memecoins"] as const;
+
+const web3 = [
+  "web3",
+  "defi",
+  "nft",
+  "gamefi",
+  "metaverse",
+  "zk",
+  "dao",
+  "infra-l1l2",
+  "exchange",
+  "memecoins",
+  "crypto-vc",
+  "eco-ethereum",
+  "eco-solana",
+  "eco-fantom",
+  "eco-polkadot",
+] as const;
+
+const ai = [
+  "ai-ml",
+  "genai",
+  "computer-vision",
+  "robotics",
+  "data-analytics",
+] as const;
+
+const finance = [
+  "fintech",
+  "banking",
+  "payments",
+  "insurtech",
+  "quant-trading",
+  "accounting-tax",
+] as const;
+
+const products = [
+  "saas-b2b",
+  "devtools",
+  "cloud-infra",
+  "open-source",
+  "cybersecurity",
+  "ecommerce",
+  "marketplaces",
+  "adtech-martech",
+  "hr-tech",
+] as const;
+
+const games = [
+  "gamedev",
+  "igaming",
+  "ar-vr",
+  "media-streaming",
+  "creator-economy",
+  "music",
+] as const;
+
+const health = [
+  "healthtech",
+  "medtech",
+  "biotech",
+  "mental-health",
+  "fitness",
+] as const;
+
+const society = [
+  "edtech",
+  "govtech",
+  "legaltech",
+  "nonprofit",
+  "climatetech",
+  "energy",
+] as const;
+
+const industry = [
+  "logistics",
+  "proptech",
+  "autotech",
+  "agritech",
+  "foodtech",
+  "travel",
+  "space",
+  "hardware-iot",
+  "telecom",
+] as const;
+
+export const SECTOR_GROUPS = [
+  { id: "web3", sectors: web3 },
+  { id: "ai", sectors: ai },
+  { id: "finance", sectors: finance },
+  { id: "products", sectors: products },
+  { id: "games", sectors: games },
+  { id: "health", sectors: health },
+  { id: "society", sectors: society },
+  { id: "industry", sectors: industry },
+] as const;
+
+export const SECTORS = SECTOR_GROUPS.flatMap((group) => group.sectors);
+export type Sector = (typeof SECTORS)[number];
+
+export function isSector(value: string): value is Sector {
+  return (SECTORS as readonly string[]).includes(value);
+}
+
+export function isSensitiveSector(sectors: readonly string[]): boolean {
+  return sectors.some((sector) =>
+    (SENSITIVE_SECTORS as readonly string[]).includes(sector),
+  );
+}
+
+/** Web3 sectors stay ahead of the others when a card shows two badges. */
+export function sectorsForCard(
+  sectors: readonly string[],
+  limit = 2,
+): string[] {
+  const known = sectors.filter(isSector);
+  const first = known.filter((sector) =>
+    (web3 as readonly string[]).includes(sector),
+  );
+  const rest = known.filter(
+    (sector) => !(web3 as readonly string[]).includes(sector),
+  );
+  return [...first, ...rest].slice(0, limit);
+}
