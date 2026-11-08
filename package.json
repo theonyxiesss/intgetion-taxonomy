@@ -1,6 +1,6 @@
 {
   "name": "@intgetion/taxonomy",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Skill taxonomy for INTGETION JOB LIST: skill catalog, aliases, normalization, suggestions, job categories.",
   "license": "UNLICENSED",
   "type": "module",

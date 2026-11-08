@@ -52,7 +52,7 @@ Needs from the platform: type `moderation_status`, helper `public.enable_rls_den
 ## Packages inside
 
 - `.` — service functions, `JOB_CATEGORIES`, `MARKER_SKILLS`, the skill catalog
-- `./catalog` — categories, skill categories, marker skills, employment types, seniority, sectors and perks (no database)
+- `./catalog` — the whole marker vocabulary: categories, skill categories, Web3 skills, employment types, seniority, sectors, perks, regions, catalog tags and quick filters (no database)
 - `./server` — `createApp()` HTTP handler
 
 Depends on `@intgetion/kit` (v0.2.0) by git tag.
